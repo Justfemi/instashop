@@ -8,17 +8,31 @@ import Image from "next/image";
 import google from "@/app/assets/google.svg";
 import tiktok from "@/app/assets/tiktok.svg";
 import instagram from "@/app/assets/instagram.svg";
+import emptyPhoto from "@/app/assets/uploadphoto.svg";
 
 const GetStarted = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [value, setValue] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formValues, setFormValues] = useState({
     fullName: '',
     username: '',
     phoneNumber: '',
-    email: ''
+    email: '',
+    storeName: '',
+    storeTagName: '',
+    storeEmail: '',
+    storePhoneNumber: '',
+    category: '',
   });
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
 
   const handleChangeFirstStep = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -152,7 +166,88 @@ const GetStarted = () => {
 
       {step === 3 && (
         <div>
-          <h2>Enter your phone number or email to get started</h2>
+          {/* image upload */}
+          <div 
+            className="border-[0.5px] rounded-[12px] w-full max-w-md border-black border-opacity-30 p-4 flex flex-col items-center justify-center"
+          >
+            <input
+              type="file"
+              id="file-input"
+              onChange={handleFileChange}
+              className="absolute top-0 left-0 opacity-0 cursor-pointer w-full h-full"
+            />
+            {/* <div>
+              <Image
+                src={emptyPhoto}
+                alt='empty-photo'
+                priority
+              />
+            </div> */}
+            <div className="relative w-full h-28 flex items-center justify-center">
+              {selectedFile ? (
+                <Image
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="uploaded"
+                  // layout="fill"
+                  objectFit="cover"
+                  className="rounded-[12px] w-20 h-20"
+                />
+              ) : (
+                <Image
+                  src={emptyPhoto}
+                  alt="empty-photo"
+                  // layout="fill"
+                  objectFit="cover"
+                  className="rounded-[12px] w-20 h-20 object-cover"
+                />
+              )}
+            </div>
+            <p className='text-sm text-black text-opacity-40 font-normal'>Upload store logo</p>
+          </div>
+          <Input 
+            type="text"
+            name="storeName"
+            value={formValues.storeName}
+            onChange={handleChange}
+            placeholder="Store name"
+            className="w-full max-w-md mt-2"
+          />
+
+          <Input 
+            type="text"
+            name="storeTagName"
+            value={formValues.storeTagName}
+            onChange={handleChange}
+            placeholder="Store tag name"
+            className="w-full max-w-md mt-2"
+          />
+
+          <Input 
+            type="text"
+            name="storePhoneNumber"
+            value={formValues.storePhoneNumber}
+            onChange={handleChange}
+            placeholder="Store phone number"
+            className="w-full max-w-md mt-2"
+          />
+
+          <Input 
+            type="email"
+            name="storeEmail"
+            value={formValues.storeEmail}
+            onChange={handleChange}
+            placeholder="Store email"
+            className="w-full max-w-md mt-2"
+          />
+
+          <Input 
+            type="text"
+            name="category"
+            value={formValues.category}
+            onChange={handleChange}
+            placeholder="Category"
+            className="w-full max-w-md mt-2"
+          />
         </div>
       )}
       <Button
