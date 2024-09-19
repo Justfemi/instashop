@@ -49,6 +49,8 @@ const GetStarted = () => {
   const handleNext = () => {
     if(step < 3) {
       setStep(step + 1);
+    } else {
+      router.push('/create-product');
     }
   }
 
