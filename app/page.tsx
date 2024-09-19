@@ -18,7 +18,7 @@ const Register = () => {
       <Image 
         src={welcome}
         alt="welcome art"
-        className=''
+        priority
       />
       <div className="text-center my-8">
         <h2 className='text-4xl font-bold'>Welcome</h2>
