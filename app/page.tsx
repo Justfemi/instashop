@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import Image from "next/image";
-import welcome from "@/app/assets/welcomeShop.png";
+import welcome from "@/app/assets/welcome.svg";
 import Button from '@/app/components/Button';
 import { useRouter } from 'next/navigation';
 import { CircleCheck } from 'lucide-react';
@@ -21,8 +21,8 @@ const Register = () => {
         className=''
       />
       <div className="text-center my-8">
-        <h2 className='text-4xl'>Welcome</h2>
-        <p className='mt-2'>The safest place to shop for online vendors</p>
+        <h2 className='text-4xl font-bold'>Welcome</h2>
+        <p className='mt-2 text-sm font-normal'>The safest platform to shop from social media vendors</p>
       </div>
       <div className='px-4 py-3 rounded-[12px] bg-light w-full border-[0.5px] border-outline'>
         <div className='flex items-center gap-2'>
