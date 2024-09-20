@@ -63,12 +63,12 @@ const GetStarted = () => {
   }
 
   return (
-    <div className='relative flex flex-col h-screen mx-8'>
+    <div className='relative flex flex-col h-screen mx-4'>
       <div
         onClick={handleBack}
-        className='flex items-start gap-2 cursor-pointer mt-4'
+        className='flex items-center gap-2 cursor-pointer mt-4'
       >
-        <ArrowLeft className='text-black text-opacity-60'/>
+        <ArrowLeft className='text-black text-opacity-60' size={20} />
         <p className='text-black text-opacity-90 font-medium text-base'>Get started</p>
       </div>
 
