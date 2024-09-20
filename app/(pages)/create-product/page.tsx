@@ -90,7 +90,7 @@ const CreateProduct = () => {
             />
 
             <textarea 
-              className='p-3 border-[0.5px] border-black w-full max-w-md border-opacity-30 mt-3 rounded-[12px] h-28 focus:outline-none focus:ring-0.5 focus:ring-primary focus:border-primary'
+              className='p-3 border-[0.5px] border-black w-full max-w-md border-opacity-30 mt-3 rounded-[12px] h-20 focus:outline-none focus:ring-0.5 focus:ring-primary focus:border-primary'
               placeholder='Product description'
               name='description'
               value={formValues.description}
@@ -118,7 +118,7 @@ const CreateProduct = () => {
             </div>
 
             <textarea 
-              className='p-3 border-[0.5px] border-black w-full max-w-md border-opacity-30 mt-3 rounded-[12px] h-28 focus:outline-none focus:ring-0.5 focus:ring-primary focus:border-primary'
+              className='p-3 border-[0.5px] border-black w-full max-w-md border-opacity-30 mt-3 rounded-[12px] h-20 focus:outline-none focus:ring-0.5 focus:ring-primary focus:border-primary'
               placeholder='Product collection'
               name='collection'
               value={formValues.collection}
