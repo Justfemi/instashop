@@ -12,6 +12,7 @@ const config: Config = {
         primary: "#8A226F",
         light: "#FFEAFA",
         outline: "#8A226F",
+        btngray: "#00000030"
       },
     },
   },
