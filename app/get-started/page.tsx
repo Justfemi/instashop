@@ -170,37 +170,27 @@ const GetStarted = () => {
         <div>
           {/* image upload */}
           <div 
-            className="border-[0.5px] rounded-[12px] w-full max-w-md border-black border-opacity-30 p-4 flex flex-col items-center justify-center"
+            className="relative border-[0.5px] rounded-[12px] w-full max-w-md border-black border-opacity-30 p-4 flex flex-col items-center justify-center"
           >
             <input
               type="file"
               id="file-input"
+              accept="image/*"
               onChange={handleFileChange}
-              className="absolute top-0 left-0 opacity-0 cursor-pointer w-full h-full"
+              className="absolute top-0 left-0 cursor-pointer w-full h-full opacity-0"
             />
-            {/* <div>
-              <Image
-                src={emptyPhoto}
-                alt='empty-photo'
-                priority
-              />
-            </div> */}
             <div className="relative w-full h-28 flex items-center justify-center">
               {selectedFile ? (
                 <Image
                   src={URL.createObjectURL(selectedFile)}
                   alt="uploaded"
-                  // layout="fill"
-                  objectFit="cover"
-                  className="rounded-[12px] w-20 h-20"
+                  className="rounded-full w-20 h-20 object-cover"
                 />
               ) : (
                 <Image
                   src={emptyPhoto}
                   alt="empty-photo"
-                  // layout="fill"
-                  objectFit="cover"
-                  className="rounded-[12px] w-20 h-20 object-cover"
+                  className="w-20 h-20 object-cover"
                 />
               )}
             </div>
