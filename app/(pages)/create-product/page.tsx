@@ -38,6 +38,10 @@ const CreateProduct = () => {
     }));
   };
 
+  const handleSaveProduct = () => {
+    router.push('/products');
+  }
+
   return (
     <div className='flex flex-col h-screen'>
       <div className='flex items-center justify-between mt-4 mx-4'>
@@ -210,7 +214,12 @@ const CreateProduct = () => {
           <button className='p-2.5 bg-white text-primary border border-primary font-medium rounded-full shadow-sm w-full'>
             Cancel
           </button>
-          <Button className='w-full'>Save</Button>
+          <Button 
+            className='w-full'
+            onClick={handleSaveProduct}
+          >
+            Save
+          </Button>
         </div>
       </div>
 
