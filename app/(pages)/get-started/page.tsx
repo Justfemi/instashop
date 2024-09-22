@@ -279,6 +279,15 @@ const GetStarted = () => {
       >
         Continue
       </Button>
+      <div className='hidden'>
+        {
+          user ? (
+            <p className='text-xs mt-3'>Welcome, {user.email}</p>
+          ) : (
+            <p className='text-xs mt-3'>Not logged in</p>
+          )
+        }
+      </div>
     </form>
   )
 }
