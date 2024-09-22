@@ -1,6 +1,6 @@
-import { products } from '../data';
-import Image from 'next/image';
+import { products } from '../data'; 
 import { notFound } from 'next/navigation';
+import ProductClient from '@/app/components/ProductClient';
 
 interface ProductDetailProps {
   params: {
@@ -22,10 +22,8 @@ const ProductDetails = ({ params }: ProductDetailProps) => {
   }
 
   return (
-    <div>
-      <h2>{product.name}</h2>
-      <Image src={product.imageSrc} alt={product.name} width={600} height={400} />
-      <p>Price: #{product.price}</p>
+    <div className='flex flex-col h-screen'>
+      <ProductClient product={product} />
     </div>
   );
 };
