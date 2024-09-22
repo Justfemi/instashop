@@ -16,7 +16,7 @@ interface ProductClientProps {
     originalPrice: number;
     ratingSrc: string;
     sold: number;
-    discount: number;
+    discount: string;
   };
 }
 
@@ -247,7 +247,6 @@ const ProductClient = ({ product }: ProductClientProps) => {
         <div className='flex items-center justify-center px-4 mb-4'>
           <Button 
             className='w-full'
-            // onClick={handleSaveProduct}
           >
             Publish
           </Button>
