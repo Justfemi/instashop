@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '@/app/components/Button';
 import Input from '@/app/components/Input';
 import { ArrowLeft } from 'lucide-react';
@@ -9,6 +9,9 @@ import google from "@/app/assets/google.svg";
 import tiktok from "@/app/assets/tiktok.svg";
 import instagram from "@/app/assets/instagram.svg";
 import emptyPhoto from "@/app/assets/uploadphoto.svg";
+import { AuthContext } from '@/app/context/AuthContext';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import app from '@/firebase';
 
 const GetStarted = () => {
   const router = useRouter();
@@ -18,7 +21,7 @@ const GetStarted = () => {
   const [formValues, setFormValues] = useState({
     fullName: '',
     username: '',
-    phoneNumber: '',
+    password: '',
     email: '',
     storeName: '',
     storeTagName: '',
@@ -26,6 +29,32 @@ const GetStarted = () => {
     storePhoneNumber: '',
     category: '',
   });
+  // const [error, setError] = useState(null);
+
+  const authContext = useContext(AuthContext);
+  const auth = getAuth(app);
+
+  if(!authContext) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+  const { user } = authContext;
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { email, password } = formValues;
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
+      alert(`Error signing in: ${errorMessage}`);
+    }
+    handleNext();
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -63,7 +92,7 @@ const GetStarted = () => {
   }
 
   return (
-    <div className='relative flex flex-col h-screen mx-4'>
+    <form className='relative flex flex-col h-screen mx-4'>
       <div
         onClick={handleBack}
         className='flex items-center gap-2 cursor-pointer mt-4'
@@ -99,7 +128,7 @@ const GetStarted = () => {
       )}
 
       {step === 2 && (
-        <div>
+        <form onSubmit={handleLogin}>
           <h2 className='text-2xl font-medium text-black text-opacity-90'>Complete profile setup</h2>
           <p className='mt-4 text-sm font-normal text-black text-opacity-60'>Connect your socials for quick setup</p>
           <div className='flex items-center gap-2 my-6'>
@@ -147,15 +176,6 @@ const GetStarted = () => {
           />
 
           <Input 
-            type="text"
-            name="phoneNumber"
-            value={formValues.phoneNumber}
-            onChange={handleChange}
-            placeholder="Phone number"
-            className="w-full max-w-md mt-3"
-          />
-
-          <Input 
             type="email"
             name="email"
             value={formValues.email}
@@ -163,7 +183,16 @@ const GetStarted = () => {
             placeholder="Email"
             className="w-full max-w-md mt-3"
           />
-        </div>
+
+          <Input 
+            type="password"
+            name="password"
+            value={formValues.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="w-full max-w-md mt-3"
+          />
+        </form>
       )}
 
       {step === 3 && (
@@ -243,12 +272,14 @@ const GetStarted = () => {
         </div>
       )}
       <Button
-        onClick={handleNext}
+        onClick={() => {
+          handleNext();
+        }}
         className="absolute bottom-4 w-full"
       >
         Continue
       </Button>
-    </div>
+    </form>
   )
 }
 
